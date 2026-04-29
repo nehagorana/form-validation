@@ -1,116 +1,49 @@
-// Get form
-const form = document.getElementById("bookingForm");
+document.getElementById("dob").addEventListener("change", function () {
+    let dob = new Date(this.value);
+    let today = new Date();
 
-// Run on submit
-form.addEventListener("submit", function(e) {
-    e.preventDefault(); // stop default submit
+    let age = today.getFullYear() - dob.getFullYear();
+    let m = today.getMonth() - dob.getMonth();
 
-    // Clear previous errors
-    clearErrors();
-
-    let isValid = true;
-
-    // Get values
-    const fname = document.getElementById("fname").value.trim();
-    const lname = document.getElementById("lname").value.trim();
-    const dob = document.getElementById("dob").value;
-    const from = document.getElementById("from").value.trim();
-    const to = document.getElementById("to").value.trim();
-    const departure = document.getElementById("departure").value;
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
-    const confirm = document.getElementById("confirm").value;
-
-    // Name validation
-    if (fname === "") {
-        showError("fname", "First name is required");
-        isValid = false;
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
     }
 
-    if (lname === "") {
-        showError("lname", "Last name is required");
-        isValid = false;
-    }
+    document.getElementById("age").value = age;
+});
 
-    // DOB
-    if (dob === "") {
-        showError("dob", "Date of birth is required");
-        isValid = false;
-    }
 
-    // From/To
-    if (from === "") {
-        showError("from", "Departure city is required");
-        isValid = false;
-    }
+// PASSWORD STRENGTH
+document.getElementById("password").addEventListener("input", function () {
+    let val = this.value;
+    let strength = document.getElementById("strength");
 
-    if (to === "") {
-        showError("to", "Destination city is required");
-        isValid = false;
-    }
-
-    // Departure date
-    if (departure === "") {
-        showError("departure", "Departure date is required");
-        isValid = false;
-    }
-
-    // Phone validation (10 digits)
-    const phonePattern = /^[0-9]{10}$/;
-    if (!phonePattern.test(phone)) {
-        showError("phone", "Enter valid 10-digit number");
-        isValid = false;
-    }
-
-    // Email validation
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if (!emailPattern.test(email)) {
-        showError("email", "Enter valid email");
-        isValid = false;
-    }
-
-    // Username
-    if (username === "") {
-        showError("username", "Username required");
-        isValid = false;
-    }
-
-    // Password
-    if (password.length < 6) {
-        showError("password", "Minimum 6 characters");
-        isValid = false;
-    }
-
-    // Confirm password
-    if (password !== confirm) {
-        showError("confirm", "Passwords do not match");
-        isValid = false;
-    }
-
-    // If all valid
-    if (isValid) {
-        alert("Your details are successfully saved!");
-        form.reset();
+    if (val.length < 6) {
+        strength.textContent = "Weak";
+        strength.style.color = "red";
+    } else if (val.match(/[A-Z]/) && val.match(/[0-9]/) && val.match(/[@$!%*?&]/)) {
+        strength.textContent = "Strong";
+        strength.style.color = "green";
+    } else {
+        strength.textContent = "Medium";
+        strength.style.color = "orange";
     }
 });
 
 
-// Function to show error
-function showError(id, message) {
-    const element = document.getElementById(id);
-
-    const error = document.createElement("small");
-    error.style.color = "red";
-    error.innerText = message;
-
-    element.parentNode.appendChild(error);
-}
+// DATE RESTRICTIONS
+let today = new Date().toISOString().split("T")[0];
+document.getElementById("departure").setAttribute("min", today);
+document.getElementById("return").setAttribute("min", today);
 
 
-// Clear old errors
-function clearErrors() {
-    const errors = document.querySelectorAll("small");
-    errors.forEach(e => e.remove());
-}
+// PASSWORD MATCH CHECK
+document.getElementById("form").addEventListener("submit", function (e) {
+    let pass = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+
+    if (pass !== confirm) {
+        alert("Passwords do not match!");
+        e.preventDefault();
+    }
+});

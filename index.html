@@ -2,119 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flight Booking Form</title>
+    <title>Travel Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Flight Booking Form</h2>
+<div class="container">
+    <h2>✈ Travel Form</h2>
 
-<form>
+    <form id="form">
 
-    <fieldset>
-        <legend>Passenger Details</legend>
-
-        <label for="prefix">Prefix:</label>
-        <select id="prefix" name="prefix">
+        <select required>
+            <option value="">Prefix</option>
             <option>Mr</option>
             <option>Ms</option>
             <option>Mrs</option>
-            <option>Dr</option>
         </select>
-        <br><br>
 
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname" required>
-        <br><br>
+        <input type="text" placeholder="First Name" required>
+        <input type="text" placeholder="Last Name" required>
 
-        <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lname" required>
-        <br><br>
+        <input type="text" placeholder="Username" required>
 
-        <label for="gender">Gender:</label>
-        <input type="radio" name="gender" value="male"> Male
-        <input type="radio" name="gender" value="female"> Female
-        <input type="radio" name="gender" value="other"> Other
-        <br><br>
-
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" required>
-        <br><br>
-
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="1" max="120">
-        <br><br>
-
-    </fieldset>
-
-    <fieldset>
-        <legend>Flight Details</legend>
-
-        <label for="from">From:</label>
-        <input type="text" id="from" name="from" placeholder="Departure City" required>
-        <br><br>
-
-        <label for="to">To:</label>
-        <input type="text" id="to" name="to" placeholder="Destination City" required>
-        <br><br>
-
-        <label for="departure">Departure Date:</label>
-        <input type="date" id="departure" name="departure" min="29/04/2026" required>
-        <br><br>
-
-        <label for="return">Return Date:</label>
-        <input type="date" id="return" name="return" min="29/04/2026">
-        <br><br>
-
-        <label for="class">Travel Class:</label>
-        <select id="class" name="class">
-            <option>Economy</option>
-            <option>Business</option>
-            <option>First Class</option>
+        <select required>
+            <option value="">Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
         </select>
-        <br><br>
 
-        <label for="passengers">Number of Passengers:</label>
-        <input type="number" id="passengers" name="passengers" min="1" max="10" required>
-        <br><br>
+        <input type="date" id="dob" required>
+        <input type="number" id="age" placeholder="Age" readonly>
 
-    </fieldset>
+        <input type="tel" id="phone" placeholder="Contact Number" required>
+        <small id="phoneError"></small>
 
-    <fieldset>
-        <legend>Contact Details</legend>
+        <input type="email" placeholder="Email" required>
 
-        <label for="phone">Contact Number:</label>
-        <input type="tel" id="phone" name="phone" required>
-        <br><br>
+        <input type="password" id="password" placeholder="Password" required>
+        <small id="strength"></small>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
+        <input type="password" id="confirm" placeholder="Confirm Password" required>
+        <small id="match"></small>
 
-    </fieldset>
+        <input type="text" placeholder="Departure City" required>
+        <input type="text" placeholder="Destination" required>
 
-    <fieldset>
-        <legend>Account Setup</legend>
+        <input type="date" id="departure" required>
+        <input type="date" id="return" required>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br><br>
+        <button type="submit">Book</button>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
+    </form>
+</div>
 
-        <label for="confirm">Confirm Password:</label>
-        <input type="password" id="confirm" name="confirm" required>
-        <br><br>
-
-    </fieldset>
-
-    <button type="submit">Book Flight</button>
-
-</form>
- 
 <script src="work.js"></script>
-
 </body>
 </html>
