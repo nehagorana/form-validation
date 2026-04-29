@@ -1,51 +1,116 @@
+// Get form
 const form = document.getElementById("bookingForm");
 
+// Run on submit
 form.addEventListener("submit", function(e) {
-    e.preventDefault();
+    e.preventDefault(); // stop default submit
 
-    let departure = document.getElementById("departure").value;
-    let ret = document.getElementById("return").value;
-    let password = document.getElementById("password").value;
-    let confirm = document.getElementById("confirm").value;
+    // Clear previous errors
+    clearErrors();
 
-    let today = new Date();
-    let minDate = "2026-01-01";
+    let isValid = true;
 
-    if (departure < minDate || ret < minDate) {
-        alert("Dates cannot be before 2026");
-        return;
+    // Get values
+    const fname = document.getElementById("fname").value.trim();
+    const lname = document.getElementById("lname").value.trim();
+    const dob = document.getElementById("dob").value;
+    const from = document.getElementById("from").value.trim();
+    const to = document.getElementById("to").value.trim();
+    const departure = document.getElementById("departure").value;
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm").value;
+
+    // Name validation
+    if (fname === "") {
+        showError("fname", "First name is required");
+        isValid = false;
     }
 
-    if (ret < departure) {
-        alert("Return date must be after departure date");
-        return;
+    if (lname === "") {
+        showError("lname", "Last name is required");
+        isValid = false;
     }
 
-    let passPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,16}$/;
-
-    if (!passPattern.test(password)) {
-        alert("Password must be 8-16 chars, include capital, number & special character");
-        return;
+    // DOB
+    if (dob === "") {
+        showError("dob", "Date of birth is required");
+        isValid = false;
     }
 
+    // From/To
+    if (from === "") {
+        showError("from", "Departure city is required");
+        isValid = false;
+    }
+
+    if (to === "") {
+        showError("to", "Destination city is required");
+        isValid = false;
+    }
+
+    // Departure date
+    if (departure === "") {
+        showError("departure", "Departure date is required");
+        isValid = false;
+    }
+
+    // Phone validation (10 digits)
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        showError("phone", "Enter valid 10-digit number");
+        isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        showError("email", "Enter valid email");
+        isValid = false;
+    }
+
+    // Username
+    if (username === "") {
+        showError("username", "Username required");
+        isValid = false;
+    }
+
+    // Password
+    if (password.length < 6) {
+        showError("password", "Minimum 6 characters");
+        isValid = false;
+    }
+
+    // Confirm password
     if (password !== confirm) {
-        alert("Passwords do not match");
-        return;
+        showError("confirm", "Passwords do not match");
+        isValid = false;
     }
 
-    alert("Your details are successfully saved!");
+    // If all valid
+    if (isValid) {
+        alert("Your details are successfully saved!");
+        form.reset();
+    }
 });
-let departure = document.getElementById("departure").value;
-let ret = document.getElementById("return").value;
 
-let minDate = "2026-04-29";
 
-if (departure < minDate || ret < minDate) {
-    alert("Dates cannot be before 2025");
-    return;
+// Function to show error
+function showError(id, message) {
+    const element = document.getElementById(id);
+
+    const error = document.createElement("small");
+    error.style.color = "red";
+    error.innerText = message;
+
+    element.parentNode.appendChild(error);
 }
 
-if (ret < departure) {
-    alert("Return date must be after departure date");
-    return;
+
+// Clear old errors
+function clearErrors() {
+    const errors = document.querySelectorAll("small");
+    errors.forEach(e => e.remove());
 }
