@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Booking Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Flight Booking Form</h2>
+
+<form>
+
+    <fieldset>
+        <legend>Passenger Details</legend>
+
+        <label for="prefix">Prefix:</label>
+        <select id="prefix" name="prefix">
+            <option>Mr</option>
+            <option>Ms</option>
+            <option>Mrs</option>
+            <option>Dr</option>
+        </select>
+        <br><br>
+
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" required>
+        <br><br>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname" required>
+        <br><br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other
+        <br><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        <br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1" max="120">
+        <br><br>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Flight Details</legend>
+
+        <label for="from">From:</label>
+        <input type="text" id="from" name="from" placeholder="Departure City" required>
+        <br><br>
+
+        <label for="to">To:</label>
+        <input type="text" id="to" name="to" placeholder="Destination City" required>
+        <br><br>
+
+        <label for="departure">Departure Date:</label>
+        <input type="date" id="departure" name="departure" required>
+        <br><br>
+
+        <label for="return">Return Date:</label>
+        <input type="date" id="return" name="return">
+        <br><br>
+
+        <label for="class">Travel Class:</label>
+        <select id="class" name="class">
+            <option>Economy</option>
+            <option>Business</option>
+            <option>First Class</option>
+        </select>
+        <br><br>
+
+        <label for="passengers">Number of Passengers:</label>
+        <input type="number" id="passengers" name="passengers" min="1" max="10" required>
+        <br><br>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Contact Details</legend>
+
+        <label for="phone">Contact Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Account Setup</legend>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" id="confirm" name="confirm" required>
+        <br><br>
+
+    </fieldset>
+
+    <button type="submit">Book Flight</button>
+
+</form>
+ 
+<script src="work.js"></script>
+
+</body>
+</html>
